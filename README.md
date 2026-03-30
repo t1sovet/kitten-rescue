@@ -9,10 +9,9 @@ A community-driven platform dedicated to connecting lost or abandoned kittens wi
 *   **Adoption Resources:** Guides on kitten care and integration.
 
 ## 🛠️ Tech Stack
-*   **Frontend:** React / Next.js
-*   **Backend:** Node.js / Express
-*   **Database:** MongoDB
-*   **Authentication:** Firebase Auth
+*   **Frontend:** Angular / Node.js
+*   **Backend:** Python / Django
+*   **Database:** PostgreSQL
 
 ## 👥 Meet the Team
 This project was developed by the following contributors:
