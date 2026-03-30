@@ -18,7 +18,7 @@ A community-driven platform dedicated to connecting lost or abandoned kittens wi
 This project was developed by the following contributors:
 *   **Ossepyan Tevos** (UI/UX Designer)
 *   **Aliev Karim** (Backflip Frontend)
-*   **Meiramkhn Alinur** (Backend Engineer)
+*   **Meiramkhan Alinur** (Backend Engineer)
 
 ## 🚀 Getting Started
 1. **Clone the repo:**
