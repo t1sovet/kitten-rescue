@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './kitten-card.css',
 })
 export class KittenCard {
+  deleteKittenCard() {
 
+  }
 }
