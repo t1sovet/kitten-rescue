@@ -22,4 +22,4 @@ This project was developed by the following contributors:
 ## 🚀 Getting Started
 1. **Clone the repo:**
    ```bash
-   git clone https://github.com/kitten-rescue
+   git clone https://github.com/t1sovet/kitten-rescue.git
