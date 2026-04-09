@@ -1,1 +1,25 @@
-.DS_Store node_modules venv/ __pycache__/ *.pyc db.sqlite3
+# --- Django --- #
+**/__pycache__/
+**/*.py[cod]
+**/*.$py.class
+djgo/venv/
+djgo/env/
+djgo/.env
+djgo/db.sqlite3
+djgo/db.sqlite3-journal
+djgo/media/
+djgo/staticfiles/
+djgo/*.log
+
+# --- Angular --- #
+kittenfront/node_modules/
+kittenfront/.angular/
+kittenfront/dist/
+kittenfront/tmp/
+kittenfront/out-tsc/
+kittenfront/bazel-out/
+kittenfront/*.log
+kittenfront/.editorconfig
+
+# --- IDK ---
+.DS_Store
