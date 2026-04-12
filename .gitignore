@@ -1,25 +1,5 @@
-# --- Django --- #
-**/__pycache__/
-**/*.py[cod]
-**/*.$py.class
-djgo/venv/
-djgo/env/
-djgo/.env
-djgo/db.sqlite3
-djgo/db.sqlite3-journal
-djgo/media/
-djgo/staticfiles/
-djgo/*.log
-
-# --- Angular --- #
-kittenfront/node_modules/
-kittenfront/.angular/
-kittenfront/dist/
-kittenfront/tmp/
-kittenfront/out-tsc/
-kittenfront/bazel-out/
-kittenfront/*.log
-kittenfront/.editorconfig
-
-# --- IDK ---
+# macOS staff
 .DS_Store
+
+# JetBrains
+.idea/
