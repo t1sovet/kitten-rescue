@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Address, Kitten, Message
+from .models import Address, Kitten, Message, AdoptionRequest
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -12,12 +12,15 @@ class UserSerializer(serializers.ModelSerializer):
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
-        fields = ['id', "city", "street", "building_number"]
+        fields = ["id", "city", "street", "building_number"]
 
 
 class KittenSerializer(serializers.ModelSerializer):
     owner_name = serializers.ReadOnlyField(source="owner.username")
-    address = AddressSerializer(read_only=True)
+
+    address_detail = AddressSerializer(source="address", read_only=True)
+
+    address = serializers.PrimaryKeyRelatedField(queryset=Address.objects.all())
 
     class Meta:
         model = Kitten
@@ -32,7 +35,28 @@ class KittenSerializer(serializers.ModelSerializer):
             "owner_name",
             "is_adopted",
             "address",
+            "address_detail",
         ]
+        read_only_fields = ["is_adopted"]
+
+
+class AdoptionRequestSerializer(serializers.ModelSerializer):
+    requester_name = serializers.ReadOnlyField(source="requester.username")
+    kitten_name = serializers.ReadOnlyField(source="kitten.name")
+
+    class Meta:
+        model = AdoptionRequest
+        fields = [
+            "id",
+            "kitten",
+            "kitten_name",
+            "requester",
+            "requester_name",
+            "message",
+            "status",
+            "created_at",
+        ]
+        read_only_fields = ["requester", "status"]
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -52,19 +76,20 @@ class MessageSerializer(serializers.ModelSerializer):
             "kitten",
         ]
 
+
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'email', 'first_name', 'last_name')
+        fields = ("username", "password", "email", "first_name", "last_name")
 
     def create(self, validated_data):
         user = User.objects.create_user(
-            username=validated_data['username'],
-            password=validated_data['password'],
-            email=validated_data.get('email', ''),
-            first_name=validated_data.get('first_name', ''),
-            last_name=validated_data.get('last_name', '')
+            username=validated_data["username"],
+            password=validated_data["password"],
+            email=validated_data.get("email", ""),
+            first_name=validated_data.get("first_name", ""),
+            last_name=validated_data.get("last_name", ""),
         )
         return user
