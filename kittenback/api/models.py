@@ -28,15 +28,14 @@ class Kitten(models.Model):
     )
 
     address = models.ForeignKey(
-        Address, default="ToleBi 59", on_delete=models.SET_DEFAULT
+        Address, on_delete=models.CASCADE, related_name="kittens"
     )
+    
+    is_adopted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} ({self.breed})"
 
-    @property
-    def is_adopted(self):
-        return self.owner is not None
 
 class Message(models.Model):
     TAG_CHOICES = [
@@ -61,7 +60,32 @@ class Message(models.Model):
     )
 
     class Meta:
-        ordering = ["-timestamp"]  
+        ordering = ["-timestamp"]
 
     def __str__(self):
         return f"[{self.get_tag_display()}] {self.sender.username}: {self.content[:30]}"
+
+
+class AdoptionRequest(models.Model):
+    class Status(models.TextChoices):
+        PENDING = "PENDING", "Ожидает"
+        APPROVED = "APPROVED", "Одобрено"
+        REJECTED = "REJECTED", "Отклонено"
+
+    kitten = models.ForeignKey(
+        Kitten, on_delete=models.CASCADE, related_name="adoption_requests"
+    )
+    requester = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="my_requests"
+    )
+    message = models.TextField(blank=True)
+    status = models.CharField(
+        max_length=10, choices=Status.choices, default=Status.PENDING
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = (
+            "kitten",
+            "requester",
+        ) 
